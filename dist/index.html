@@ -31,52 +31,77 @@
         visibility: visible;
       }
     </style>
-    <script type="module" crossorigin src="/assets/index-BbjSoFYH.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-Bx8zMRgC.css">
+    <script type="module" crossorigin src="/assets/index-7AU32sIW.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-ClKpfNwl.css">
   </head>
   <body>
+    <!-- Gooey filters: one per section. feGaussianBlur + feColorMatrix alpha
+         threshold — both are animated from JS while the section scrubs. -->
+    <svg class="goo-defs" aria-hidden="true">
+      <defs>
+        <filter id="goo-0" x="-20%" y="-100%" width="140%" height="300%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="0" result="blur" />
+          <feColorMatrix
+            in="blur"
+            type="matrix"
+            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"
+          />
+        </filter>
+        <filter id="goo-1" x="-20%" y="-100%" width="140%" height="300%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="0" result="blur" />
+          <feColorMatrix
+            in="blur"
+            type="matrix"
+            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"
+          />
+        </filter>
+        <filter id="goo-2" x="-20%" y="-100%" width="140%" height="300%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="0" result="blur" />
+          <feColorMatrix
+            in="blur"
+            type="matrix"
+            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"
+          />
+        </filter>
+      </defs>
+    </svg>
+
     <div class="spacer"></div>
+
+    <!-- .statement__heading carries the SVG goo filter; .melt__inner carries
+         the em-based CSS blur + opacity — both layers make the melt. -->
     <section class="statement">
       <div class="statement__content">
-        <h2 class="statement__heading">Made to Stand Out</h2>
-        <p class="statement__body">
-          We are madeforaward — a digital art studio crafting bold, immersive
-          experiences for brands that refuse to blend in. Every pixel we push
-          is driven by obsession, every interaction engineered to be felt.
-          From concept to code, we blur the line between design and emotion.
-          We don't chase trends — we build the work that defines them, and we
-          measure success by the moments people remember long after the
-          screen goes dark.
-        </p>
+        <h2 class="statement__heading">
+          <span class="melt__inner">
+            We are madeforaward — a digital art studio crafting bold,
+            immersive experiences for brands that refuse to blend in.
+          </span>
+        </h2>
       </div>
     </section>
     <section class="statement">
       <div class="statement__content">
-        <h2 class="statement__heading">Worlds You Step Inside</h2>
-        <p class="statement__body">
-          We sculpt motion, sound and story into digital worlds that people
-          don't just see — they step inside. Every project begins as a blank
-          canvas and ends as an experience impossible to forget. Our craft
-          lives at the intersection of art and technology, where design
-          decisions become feelings and code becomes atmosphere. This is
-          where imagination stops being an idea and becomes something you can
-          touch.
-        </p>
+        <h2 class="statement__heading">
+          <span class="melt__inner">
+            We sculpt motion, sound and story into digital worlds that people
+            don't just see — they step inside.
+          </span>
+        </h2>
       </div>
     </section>
     <section class="statement">
       <div class="statement__content">
-        <h2 class="statement__heading">Built With the Bold</h2>
-        <p class="statement__body">
-          We partner with the bold — turning ambition into award-winning
-          digital experiences that leave a mark. Great work is never an
-          accident; it's a hundred deliberate choices made with intent. We
-          work with the founders, the rebels and the brands ready to make
-          noise in silent markets. If you're ready to stand out, we're ready
-          to build it with you.
-        </p>
+        <h2 class="statement__heading">
+          <span class="melt__inner">
+            We partner with the bold — turning ambition into award-winning
+            digital experiences that leave a mark.
+          </span>
+        </h2>
       </div>
     </section>
+
     <div class="spacer"></div>
+
   </body>
 </html>
