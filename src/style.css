@@ -35,6 +35,7 @@ body {
   font-family: "Ease Double Rounded", system-ui, sans-serif;
   background-color: #0e0e0e;
   color: #f4f4f0;
+  overflow-x: hidden;
 }
 
 .goo-defs {
@@ -45,18 +46,22 @@ body {
 }
 
 .spacer {
+  /* svh: stable unit on mobile — 100vh jumps when the address bar hides */
   height: 100vh;
+  height: 100svh;
 }
 
 .statement {
   min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 2rem 0;
 }
 
 .statement__content {
-  width: 80%;
+  width: min(80%, 72rem);
   text-align: center;
 }
 
@@ -71,4 +76,28 @@ body {
 .melt__inner {
   display: block;
   will-change: filter, opacity;
+}
+
+@media (max-width: 768px) {
+  .statement__content {
+    width: 90%;
+  }
+
+  .statement__heading {
+    font-size: clamp(1.5rem, 6.8vw, 2.5rem);
+    line-height: 1.12;
+    letter-spacing: -0.03em;
+  }
+}
+
+@media (max-width: 480px) {
+  .statement__content {
+    width: 92%;
+  }
+
+  .statement__heading {
+    font-size: clamp(1.35rem, 7.4vw, 1.9rem);
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+  }
 }
