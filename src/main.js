@@ -5,6 +5,10 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Mobile browsers fire resize when the address bar collapses/expands;
+// without this ScrollTrigger recalculates mid-scroll and the scrub jumps.
+ScrollTrigger.config({ ignoreMobileResize: true });
+
 const lenis = new Lenis({
   duration: 1.2,
   smoothWheel: true,
@@ -23,7 +27,19 @@ const CONFIG = {
   alphaShift: -117, // feColorMatrix alpha offset at full liquid
   opacityPow: 1, // >1 = text stays invisible longer before surfacing
   meltEnd: 1, // progress at which melt fully resolves (0.5 = twice as fast)
+  refFontSize: 68, // px, desktop heading size the svgBlur value was tuned at
 };
+
+// svgBlur is in px, tuned for the desktop font size. On mobile the text is
+// roughly half as big, so scale the blur with the actual rendered font size
+// or the goo filter eats the whole line.
+let blurScale = 1;
+function updateBlurScale() {
+  const heading = document.querySelector(".statement__heading");
+  if (!heading) return;
+  const fontSize = parseFloat(getComputedStyle(heading).fontSize);
+  blurScale = fontSize / CONFIG.refFontSize;
+}
 
 function createMelt(el, id) {
   const inner = el.querySelector(".melt__inner");
@@ -59,7 +75,10 @@ function createMelt(el, id) {
         filterOn = true;
       }
       const mult = 1 + (CONFIG.alphaMult - 1) * melt;
-      blur.setAttribute("stdDeviation", (CONFIG.svgBlur * melt).toFixed(2));
+      blur.setAttribute(
+        "stdDeviation",
+        (CONFIG.svgBlur * blurScale * melt).toFixed(2),
+      );
       matrix.setAttribute(
         "values",
         `1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 ${mult.toFixed(2)} ${shift.toFixed(2)}`,
@@ -89,6 +108,10 @@ function setupSection(section, index) {
 
   render();
 }
+
+updateBlurScale();
+// Recompute whenever ScrollTrigger recalculates (rotation, breakpoint change)
+ScrollTrigger.addEventListener("refreshInit", updateBlurScale);
 
 gsap.utils
   .toArray(".statement")
